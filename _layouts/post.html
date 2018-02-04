@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<div class="post">
+    <div class="post-info">
+        <span>Written by</span>
+        {% if page.author %}
+        {{ page.author }}
+        {% else %}
+        {{ site.author.name }}
+        {% endif %}
+
+        {% if page.date %}
+        <br>
+        <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+        {% endif %}
+    </div>
+
+    <h1 class="post-title">{{ page.title }}</h1>
+
+    {% if page.tags %}
+        <span>
+            {% for tag in page.tags %}
+            <!--                 {% capture tag_name %}{{ tag }}{% endcapture %} -->
+            <!-- <a href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a> -->
+            <a href="{{ site.baseurl }}/tags/tag.html#{{ tag }}" class="post-tag">{{ tag }}</a>
+            {% endfor %}
+        </span>
+    {% endif %}
+
+    <div class="post-line"></div>
+
+    {{ content }}
+
+</div>
+
+<div class="pagination">
+    {% if page.next.url %}
+    <a href="{{ page.next.url | prepend: site.baseurl }}" class="left arrow">&#8592;</a>
+    {% endif %}
+    {% if page.previous.url %}
+    <a href="{{ page.previous.url | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
+    {% endif %}
+
+    <a href="#" class="top">Top</a>
+</div>
+<p>
+<div class="fb-like" data-href="{{ post.url }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+<div class="fb-comments" data-href="{{ post.url }}" data-width="100%" data-numposts="5"></div>
+
+<!-- <div class="disqus">
+     <section>{% include comment-disqus.html %}</section>
+     </div> -->

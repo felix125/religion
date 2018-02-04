@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+    {% include head.html %}
+
+    <body>
+        {% include facebook.html %}
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="{{ site.baseurl }}/">
+                    <h2 class="nav-title">{{ site.title }}</h2>
+                </a>
+                <ul>
+                    {% for item in site.data.links %}
+                    {% if item[1] == '首頁' %}
+                        <li><a href="{{ site.url }}">{{ item[0] }}</a></li>
+                        {% elsif item[1] == site.baseurl %}
+                        <li><a href="{{ '/' |prepend: site.baseurl }}">{{ item[0] }}</a></li>
+                        {% else %}
+                        <li><a href="{{ item[1] |prepend: site.baseurl }}">{{ item[0] }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li><a href="{{ '/feed.xml'| prepend: site.baseurl }}">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            {{ content }}
+        </main>
+
+        {% include footer.html %}
+        {% include google-analytics.html %}
+    </body>
+</html>
